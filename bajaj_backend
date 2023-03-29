@@ -1,0 +1,35 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+
+app.post('/', (req, res) => {
+  const inputArray = req.body.array;
+
+  const user_Id = req.body.userId;
+
+  const email_Id = req.body.emailId;
+
+  const collegeRoll_No = req.body.collegeRoll_No;
+
+  const even_Nums = inputArray.filter((num) => num % 2 === 0);
+
+  const odd_Nums = inputArray.filter((num) => num % 2 === 1);
+
+  const upperCase = inputArray
+    .filter((char) => /[a-zA-Z]/.test(char))
+    .map((char) => char.toUpperCase());
+
+  const answer = {
+    status: 'success',
+    userId: user_Id,
+    emailId: email_Id,
+    collegeRollNum: collegeRoll_No,
+    evenNums: even_Nums,
+    oddNums: odd_Nums,
+    upperCase: upperCase,
+  };
+});
+
+app.listen(3000, () => console.log('Server started!!'));
